@@ -1,0 +1,43 @@
+
+<div *ngIf="showFilter" class="parti-filter">
+	Filter by 
+	<mat-radio-group class="filter-radio-group" [(ngModel)]="filterOption">
+	  <mat-radio-button [color]="'primary'" class="filter-radio-button" [value]="1">School</mat-radio-button>
+	  <mat-radio-button [color]="'primary'" class="filter-radio-button" [value]="2">Participant</mat-radio-button>
+	</mat-radio-group>
+	<mat-form-field>
+		<input #schoolCode matInput cdkFocusInitial type="text" placeholder= "School Code" [disabled]='filterOption != 1' (keyup) = "noMatchFound = false" />
+  	</mat-form-field>
+	<mat-form-field >
+		<input #partCode matInput cdkFocusInitial type="text" placeholder= "Participant Code(s)" [disabled]='filterOption != 2' (keyup) = "noMatchFound = false" />
+  	</mat-form-field>
+	<button mat-flat-button (click)="filterData(schoolCode.value, partCode.value)"> Filter </button>
+	<span *ngIf="noMatchFound" style='font-size:12px; '> No Match Found </span>
+</div>
+
+<!--
+<div *ngFor="let participant of participants" class="parti-details">
+	<div class="event-name">
+		<span class="event-name-l">Z</span>
+		<span class="event-name-m">enith</span>
+		<span class="event-name-l">18</span>
+	</div>
+	<qrcode class="parti-code" [qrdata]="'PARTI_CODE:' + participant.PART_CODE" [size]="96" [level]="'M'"></qrcode> 
+	<div class="parti-name-2">
+		<div class="parti-name"> {{participant.PARTI_NAME}} </div>
+		<div class="parti-name"> {{participant.SCHOOL_CODE}} </div>
+	</div>
+</div> 
+-->
+<ul>
+<li *ngFor="let participant of participants" class="parti-list">
+<div class="parti-details">
+	<div style="height: 1.1in;">
+		<qrcode class="parti-code" [qrdata]="'PARTI_CODE:' + participant.PART_CODE" [size]="96" [level]="'M'"></qrcode> 
+		<span class="school-code"> {{participant.SCHOOL_CODE}} </span>
+	</div>
+	<div class="parti-name"> {{participant.PARTI_NAME}} </div>
+</div> 
+</li>
+</ul>
+

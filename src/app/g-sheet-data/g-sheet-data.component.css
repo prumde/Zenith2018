@@ -1,0 +1,72 @@
+.parti-list{
+	float: left;
+    list-style: none;
+}
+
+.parti-details
+{
+	display: inline-block;
+	height: 1.5in;
+	width: 1.5in;
+    padding: 0.125in;
+    position: relative;
+}
+.parti-code{
+	display: inline-block;
+}
+
+.parti-name
+{
+	max-height: 24px;
+    display: block;
+    font-size: 12px;
+    line-height: 12px;
+    text-align: left;
+    overflow: hidden;
+    white-space: normal;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+}
+
+.school-code{
+	display: inline-block;
+    font-size: 0.31in;
+    line-height: 0.31in;
+    padding-right: 5px;
+	writing-mode: vertical-lr;
+	text-orientation: mixed;
+	transform: rotateZ(180deg);
+}
+/*
+.event-name{
+	display: inline-block;
+	margin-right: 0.25in;
+	vertical-align: top;
+}
+.event-name-l{
+	font-size: 0.7in;
+}
+
+.event-name-m{
+	font-size: 0.35in;
+}
+*/
+.parti-filter{
+	padding: 10px;
+}
+.parti-filter mat-form-field,
+.parti-filter button{
+	display:block;
+	width: 300px;
+}
+
+.filter-radio-group {
+  display: inline-flex;
+  flex-direction: row;
+}
+
+.filter-radio-button {
+  margin: 5px;
+}
+
+

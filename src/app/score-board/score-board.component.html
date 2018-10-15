@@ -1,0 +1,61 @@
+
+<div class="mbr-center">
+    <h1 class="display-1">
+      <span style="font-weight: normal; color: var(--primary);">Score Board</span>
+      <img class = "refresh-score" src="assets/images/refresh.png" (click) = 'refresh()' />
+    </h1>
+</div>
+<ng-container *ngTemplateOutlet="scoreResult === 0 ? noEventResultData : eventResultData "></ng-container>
+
+<ng-template #noEventResultData>
+	<div class="mbr-center">
+		<p class="mbr-text-1 display-7">Excited to know the winner?</p>
+    <p class="mbr-text-4 display-7">Please wait</p>
+	</div>
+</ng-template>
+
+
+<ng-template #eventResultData>
+<div class="eventResultData">
+	<table mat-table [dataSource]="scoreBoardData" class="mat-elevation-z8" multiTemplateDataRows>
+	
+	  <!--- Note that these columns can be defined in any order.
+	        The actual rendered columns are set as a property on the row definition" -->
+	
+	  <!-- All Column -->
+	  <ng-container *ngFor="let colName of displayedColumns" matColumnDef="{{colName}}"> <!-- id of the column to be display in table -->
+	    <th class="display-5" mat-header-cell *matHeaderCellDef> {{displayedColumnsText[colName]}} </th> <!-- TO display text on header -->
+	    <td class="display-5" mat-cell *matCellDef="let element"> {{element[colName]}} </td> <!-- TO display result position column  -->
+    </ng-container>
+	
+		<ng-container matColumnDef="expandedDetail">
+			<td class="display-5" mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+				<div class="events-element-detail"
+							[@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+					<div class="events-container">
+							<ul>
+									<li *ngFor="let event of element.EVENTS" class="events-list">
+											<div style="width:100%;">
+													<span class="event-name">{{event.EVENT_NAME || event.EVENT_CODE}}</span>
+													<span class="event-score">{{event.SCORE}}</span> 
+											</div>
+									</li>
+							</ul>
+					</div>
+				</div>
+			</td>
+		</ng-container>
+		
+		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+		<tr mat-row *matRowDef="let row; columns: displayedColumns;"
+				class="events-element-row"
+				[class.events-expanded-row]="expandedElement === row"
+				(click)="toggleElement( row )">
+		</tr>
+		<tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="events-detail-row"></tr>
+	</table>
+</div>	
+</ng-template>
+
+
+
